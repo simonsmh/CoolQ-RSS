@@ -3,5 +3,6 @@
             "https://rsshub.app/shmtu/events",
             "https://rsshub.app/shmtu/jwc/1",
             "https://rsshub.app/shmtu/jwc/2"],
-    "QQGroup":"000000000"
+    "QQGroup":"000000000",
+    "FORMAT": "{}\nRelease at {}\n{}"
 }
