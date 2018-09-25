@@ -48,7 +48,7 @@ class rss():
         pop = self.parse(url)
 
         for i, post in enumerate(pop.entries):
-            hash = hashlib.md5(post.title.encode('utf-8')).hexdigest()
+            hash = hashlib.md5(post.link.encode('utf-8')).hexdigest()
             if hash not in self.thread:
                 self.thread.append(hash)
                 logger.debug("Getting %s# post at %s", i, url)

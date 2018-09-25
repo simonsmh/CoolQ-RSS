@@ -32,7 +32,7 @@ async def _(session: none.CommandSession):
     await session.send(session.get_optional('message') or session.current_arg)
 
 
-@none.scheduler.scheduled_job('cron', second='*/30')
+@none.scheduler.scheduled_job('cron', minute='*/5')
 async def _():
     none.logger.info("Running scheduled Job")
     loadConfig()
