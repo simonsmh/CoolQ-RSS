@@ -18,8 +18,6 @@ def loadConfig():
             URLS = config['URLS']
             global QQGroup
             QQGroup = config['QQGroup']
-            global FORMAT
-            FORMAT = config['FORMAT']
         none.logger.info("Loaded config, %s, %s", URLS, QQGroup)
     except:
         none.logger.error(
@@ -38,12 +36,25 @@ async def _():
     loadConfig()
 
     bot = none.get_bot()
-    tmp = rss().query(URLS)
-    none.logger.info(tmp)
+    tmp = rss("db").query(URLS)
     for i, post in enumerate(tmp):
-        text = FORMAT.format(post.title, ' '.join(post.summary.split()), post.link.replace('/Information/..', ''))
+        text = []
+        text.append({
+                "type": "text",
+                "data": {"text": f'{post.title}\n'}
+            })
+        text.append({
+                "type": "text",
+                "data": {"text": f'发布于 {post.author}\n'}
+            })
+        text.append({
+                "type": "text",
+                "data": {"text": f'{post.link}'}
+            })
+        none.logger.info(text)
         try:
-            await bot.send_group_msg(group_id=QQGroup, message=text)
+            for num in QQGroup:
+                await bot.send_group_msg(group_id=num, message=text)
         except CQHttpError:
             pass
 

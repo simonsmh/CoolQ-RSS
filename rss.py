@@ -15,11 +15,11 @@ logger.setLevel(logging.DEBUG)
 
 
 class rss():
-    def __init__(self):
+    def __init__(self, name):
 
         self.urldict = []
         try:
-            with open(os.path.split(os.path.realpath(__file__))[0] + '/db.json') as f:
+            with open(os.path.split(os.path.realpath(__file__))[0] + '/' + name + '.json') as f:
                 self.thread = json.load(f)
                 logger.debug("Loaded DB. Not first run.")
             self.__init_mark = False
@@ -70,5 +70,5 @@ if __name__ == "__main__":
         "https://www.cnbeta.com/backend.php",
         "https://www.ithome.com/rss/"
     ]
-    r = rss().query(URLS)
+    r = rss("db").query(URLS)
     print(r)
